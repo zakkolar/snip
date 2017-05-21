@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+</head>
+
+<body>
+<h1>Snip</h1>
+<p>Snip is an add-on designed to ease the process of turning paper worksheets into Google Forms. It provides a convenient way to crop scanned worksheets and save the resulting images to Google Drive in an organized, logical way.</p>
+<p><a href="http://zak.io/assets/downloads/programs/snip/snip-manual.pdf" target="_blank">Click here to download a PDF containing screenshots and instructions for using Snip.</a></p>
+<p>If you have just installed Snip and do not see the "Snip images" button when you open the Snip menu, refresh the page.</p>
+<? if(data.authMode==ScriptApp.AuthMode.LIMITED){ ?>
+    <p><a href="<?= getFormFolder().getUrl() ?>" target="_blank">Click here to view Snipped images for this form in Drive</a></p>
+    <h2 id="snipping">Instructions</h2>
+    <ol>
+        <li>Click on the add-ons menu (puzzle piece icon in the upper right side of the Forms editor)</li>
+        <li>Click "Snip"</li>
+        <li>Click "Snip Images"</li>
+        <li>Click "Select Image" and pick an existing image from your Drive or upload your own</li>
+        <li>Drag the blue handles on the crop rectangle to select an instruction or question you would like to save as its own image.
+            <ul>
+                <li>Scroll up and down with your mouse/trackpad to zoom in and out on the image</li>
+                <li>Click and drag outside the crop box to move the worksheet around</li>
+                <li>Click and drag inside the crop box to move the crop box around</li>
+            </ul>
+        </li>
+        <li>Select whether the image is a set of instructions or a question/answer
+            <ul>
+                <li>If the image is a question/answer, specify the question number and whether it is an answer option for that question.</li>
+            </ul>
+        </li>
+        <li>Click "Save to Drive" and your image will automatically be cropped, named, and saved into a Google Drive folder unique to the open form.</li>
+        <li>Crop and save as many images as you need. You can continue to crop and save as images are uploading; however, please wait for all images to finish saving before closing the Snip window.</li>
+    </ol>
+    <p>Images are saved to a folder in your Google Drive and named based on their question number so that you can insert them into your forms. <a href="https://support.google.com/docs/answer/2839737?hl=en" target="_blank">Click here to learn how to add images to questions and answers.</a></p>
+<? } else { ?>
+    <p>To take advantage of Snip, please completely install the add-on.</p>
+    <h2>Installation instructions:</h2>
+    <ol>
+        <li>Click on the add-ons menu (puzzle piece icon in the upper right side of the Forms editor)</li>
+        <li>Click "Snip"</li>
+        <li>Click "Help"</li>
+        <li>Click "View in Store"</li>
+        <li>Install the add-on by clicking the "Free" button</li>
+        <li>Choose the Google account you wish to connect to the add on</li>
+        <li>Click "Allow" to allow the addon to access your account. This is only used to upload from and save to your Google Drive.</li>
+    </ol>
+<? } ?>
+</body>
+</html>
