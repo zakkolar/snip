@@ -26,3 +26,5 @@ Run `gulp upload-latest` to compile your files and automatically upload them to 
 # Use without node-google-apps-script
 
 Run `gulp copy-latest` to compile your files to the `./build` directory. From here, you can manually copy them to your Google Apps Script project.
+
+If you aren't making any customizations to the code, you can copy the pre-compiled files from the `dist` folder to your Google Apps Script project without using any command line tools.

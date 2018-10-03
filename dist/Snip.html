@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <?!= include('client.main.css'); ?>
+    <?!= include('client.loader.css'); ?>
+</head>
+
+<body>
+<div>
+    <div id="snipper">
+    </div>
+    <div id="controls">
+        <div class="image-only">
+            <div class="inline form-group">
+                <label for="type">What is this image for?</label>
+                <select id="type">
+                    <option value="general">Information/instructions</option>
+                    <option value="question">A question/answer</option>
+                </select>
+            </div>
+            <div class="question">
+                <div class="inline form-group">
+                    <label for="question_number">Question number:</label>
+                    <input type="number" value="1" id="question_number">
+                </div>
+                <button class="narrow" id="decrement">-</button>
+                <button class="narrow" id="increment">+</button>
+                <div class="inline form-group">
+                    <input type="checkbox" id="is_answer">
+                    <label for="is_answer">This is an answer</label>
+                </div>
+            </div>
+            <button class="action" id="save">Save to Drive</button>
+        </div>
+        <button id="pick_image" disabled>Loading...</button>
+    </div>
+    <div id="loader">
+        <div class="icon-holder">
+            <svg alt="Images are uploading" title="Images are uploading" id="loading_icon" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+            <div id="loaded_icon">
+                <i class="fa fa-check" title="All images are uploaded" aria-hidden="true"></i>
+                <span class="sr-only">All images are uploaded</span>
+            </div>
+            <div id="error_icon">
+                <i class="fa fa-exclamation-circle" title="There was an error uploading one or more images" aria-hidden="true"></i>
+                <span class="sr-only">There was an error uploading one or more images</span>
+            </div>
+        </div>
+        <div class="label"><span id="num_loaded"></span> of <span id="num_loading"></span> images saved to Drive<span id="error_message">, <span id="num_errors"></span> error(s)</span>. <a id="folder_link" target="_blank" href="#">Click here to view the images in Drive</a></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<?!= include('client.picker.js'); ?>
+<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js"></script>
+
+<?!= include('client.main.js'); ?>
+
+</body>
+</html>
