@@ -11,17 +11,11 @@ var srcRoot = 'src';
 // The root staging folder for gapps configurations
 var dstRoot = 'build';
 
-// Runs the copy-latest task, then calls gapps upload in the correct
-// configuration directory based on the target environment
-gulp.task('upload-latest', ['copy-latest'], shell.task(['gapps upload']));
-
 gulp.task('clean-deployment', function(cb) {
     return del([dstRoot+'/**/*'],cb);
 });
 
-gulp.task('copy-latest', ['clean-deployment', 'copy-server-code', 'copy-client-code', 'compile-server-ts', 'compile-client-ts', 'compile-scss']);
-
-gulp.task('copy-server-code', ['clean-deployment'], function(){
+gulp.task('copy-server-code', function(){
     return gulp.src([
         srcRoot + '/server/*.js',
         srcRoot + '/libs/*.js',
@@ -29,7 +23,7 @@ gulp.task('copy-server-code', ['clean-deployment'], function(){
         .pipe(gulp.dest(dstRoot));
 });
 
-gulp.task('copy-client-code', ['clean-deployment'], function(){
+gulp.task('copy-client-code', function(){
     return gulp.src([
         srcRoot + '/ui/*.html',
         srcRoot + '/ui/*.css',
@@ -39,7 +33,7 @@ gulp.task('copy-client-code', ['clean-deployment'], function(){
         .pipe(gulp.dest(dstRoot));
 });
 
-gulp.task('compile-server-ts', ['clean-deployment'], function(){
+gulp.task('compile-server-ts', function(){
     return gulp.src([
         srcRoot + '/server/*.ts'])
         .pipe(ts({
@@ -48,7 +42,7 @@ gulp.task('compile-server-ts', ['clean-deployment'], function(){
         .pipe(gulp.dest(dstRoot));
 });
 
-gulp.task('compile-client-ts', ['clean-deployment'], function(){
+gulp.task('compile-client-ts', function(){
     return gulp.src([
         srcRoot + '/ui/*.ts'])
         .pipe(ts({
@@ -59,13 +53,23 @@ gulp.task('compile-client-ts', ['clean-deployment'], function(){
         .pipe(gulp.dest(dstRoot));
 });
 
-gulp.task('compile-scss', ['clean-deployment'], function(){
+gulp.task('compile-scss', function(){
     return gulp.src(srcRoot + '/ui/*.scss')
         .pipe(sass())
         .pipe(addHtmlTags())
         .pipe(addHTMLExtension())
         .pipe(gulp.dest(dstRoot));
 });
+
+
+
+
+
+gulp.task('copy-latest', gulp.series('clean-deployment', 'copy-server-code', 'copy-client-code', 'compile-server-ts', 'compile-client-ts', 'compile-scss'));
+
+// Runs the copy-latest task, then calls gapps upload in the correct
+// configuration directory based on the target environment
+gulp.task('upload-latest', gulp.series('copy-latest', shell.task(['gapps upload'])));
 
 function addHTMLExtension(){
     return rename(function(path){
