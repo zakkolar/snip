@@ -29,7 +29,7 @@ function onInstall(e){
 function showSnip() {
     initFolders();
 
-    var html = HtmlService.createTemplateFromFile('Snip').evaluate()
+    var html = HtmlService.createTemplateFromFile('ui/Snip').evaluate()
         .setWidth(700)
         .setHeight(425)
         .setSandboxMode(HtmlService.SandboxMode.IFRAME);

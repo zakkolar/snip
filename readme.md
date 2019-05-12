@@ -2,29 +2,26 @@
 
 Snip is an add-on for Google Forms to help teachers turn printed worksheets into digital forms. With Snip, users can easily crop and save sections of their worksheets (such as instructions, questions, and answers) to their Google Drive. They can then insert the cropped portions of the worksheet directly into questions and responses in Google Forms instead of having to type and recreate diagrams.
 
-# Installation
+## Development/modification
 
-1. Clone/download this repository
-2. Run `npm install`
+1. Install Google's [clasp tool](https://github.com/google/clasp):
 
-# Use with node-google-apps-script
+   `npm i @google/clasp -g`
+   
+2. Log into your Google Apps Script account via clasp
 
-`gapps` is a node module that allows users to push local changes to Google Apps Script projects to their Google Drives.
+   `clasp login`
+   
+3. Clone/download this repo
 
-## `gapps` configuration
+4. Run `npm install`
 
-1. Complete the installation and authentication (steps 1 and 2 of Quickstart) process for [node-google-apps-script](https://github.com/danthareja/node-google-apps-script)
-2. Rename `gapps.config.sample.json` as `gapps.config.json`
-3. Replace the `fileId` property in `gapps.config.json` with the ID of your Google Apps Script project's file ID
+5. Copy `.clasp.json.sample` to `.clasp.json`
+
+6. Edit `.clasp.json` and set your project ID.
     1. To find the file ID, open your project from Google Drive. The ID is in the address bar, after the `/d/` and before `/edit`
     2. For example, '//script.google.com/a/google.com/d/**abc123-xyz098**/edit?usp=drive_web'
-
-## `gapps` usage
-
-Run `gulp upload-latest` to compile your files and automatically upload them to your Google Drive project
-
-# Use without node-google-apps-script
-
-Run `gulp copy-latest` to compile your files to the `./build` directory. From here, you can manually copy them to your Google Apps Script project.
-
-If you aren't making any customizations to the code, you can copy the pre-compiled files from the `dist` folder to your Google Apps Script project without using any command line tools.
+    
+7. Develop the code. When you're ready to push it to the Google Apps Script server, run `npm run dev`
+       
+       **Note**: The `dev` command will not create a deployment. It will just push a copy of your code to the specified project for development purposes
