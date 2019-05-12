@@ -24,4 +24,4 @@ Snip is an add-on for Google Forms to help teachers turn printed worksheets into
     
 7. Develop the code. When you're ready to push it to the Google Apps Script server, run `npm run dev`
        
-       **Note**: The `dev` command will not create a deployment. It will just push a copy of your code to the specified project for development purposes
+ **Note**: The `dev` command will not create a deployment. It will just push a copy of your code to the specified project for development purposes
