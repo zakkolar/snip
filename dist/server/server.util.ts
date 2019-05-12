@@ -4,44 +4,52 @@
  * @param folder Folder to search
  * @returns {number} Number of files that contain the given string in the Folder
  */
-function countSimilarFiles(str, folder) {
-    var similar = 0;
-    var files = folder.getFiles();
-    var file;
-    while (files.hasNext()) {
+function countSimilarFiles(str, folder){
+    let similar=0;
+    const files = folder.getFiles();
+    let file;
+    while(files.hasNext()){
         file = files.next();
-        if (file.getName().indexOf(str) > -1) {
+        if(file.getName().indexOf(str)>-1){
             similar++;
         }
     }
     return similar;
 }
+
 /**
  * Converts an embeddable image string to a Blob.
  * @param imgString Embeddable bas64 image string
  * @returns {Blob} Blob representing the image
  */
-function getBlobFromEmbed(imgString) {
-    var parts = imgString.split(/[\s,:;]+/);
-    var MIME = parts[1];
-    var base64 = parts[3];
-    var data = Utilities.base64Decode(base64);
-    var blob = Utilities.newBlob(data, MIME);
+function getBlobFromEmbed(imgString){
+    const parts = imgString.split(/[\s,:;]+/);
+    const MIME = parts[1];
+    const base64 = parts[3];
+
+    const data=Utilities.base64Decode(base64);
+
+    const blob = Utilities.newBlob(data, MIME);
+
     return blob;
 }
+
 /**
  * Creates an embeddable base64 image string from an image stored in Drive.
  * @param fileID ID of the existing Drive image file
  * @returns {string} Embeddable base64 image string
  */
-function getEmbeddableImage(fileID) {
-    var file = DriveApp.getFileById(fileID);
-    var blob = file.getBlob();
-    var base64 = Utilities.base64Encode(blob.getBytes());
-    var contentType = blob.getContentType();
-    var embeddableURL = "data:" + contentType + ";base64," + base64;
+function getEmbeddableImage(fileID){
+    const file = DriveApp.getFileById(fileID);
+    const blob = file.getBlob();
+    const base64 = Utilities.base64Encode(blob.getBytes());
+    const contentType = blob.getContentType();
+
+    const embeddableURL = "data:"+contentType+";base64,"+base64;
+
     return embeddableURL;
 }
+
 /**
  * Get an OAuthToken for the UI to use for the Picker
  * @returns {any}
