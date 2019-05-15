@@ -2,6 +2,7 @@
  * Create the Snip folder in the user's Google Drive. This is where all of the form folders will live.
  */
 function createAppFolder(){
+
     var folder = DriveApp.createFolder(settings().folder_name);
     PropertiesService.getUserProperties().setProperty('appFolder',folder.getId());
 }
@@ -11,7 +12,8 @@ function createAppFolder(){
  */
 function createFormFolder(){
     initAppFolder();
-    const folder = getAppFolder().createFolder(getFormTitle());
+    const folder = getAppFolder().createFolder('Snip Form '+Utilities.formatDate(new Date(), Session.getTimeZone(), 'yyyy-MM-dd HH:mm:ss'));
+    folder.setName(getFormTitle());
     PropertiesService.getUserProperties().setProperty(getFormFolderKey(),folder.getId());
 }
 
@@ -43,7 +45,6 @@ function folderExists(folderId: string){
  * Checks if the necessary folders exist; creates them if they don't
  */
 function initFolders(){
-    initAppFolder();
     initFormFolder();
 }
 

@@ -4,10 +4,10 @@
 function onOpen(e) {
     let menu = FormApp.getUi().createMenu('Snip');
     let aboutFunction;
+    menu.addItem('Snip Images', 'showSnip');
+    menu.addItem('View Snipped Images','showFolderLink');
+    menu.addSeparator();
     if(e && e.authMode == ScriptApp.AuthMode.LIMITED){
-        menu.addItem('Snip Images', 'showSnip');
-        menu.addItem('View Snipped Images','showFolderLink');
-        menu.addSeparator();
         aboutFunction='showAboutAuthLimited';
     }
     else{
@@ -19,7 +19,6 @@ function onOpen(e) {
 }
 
 function onInstall(e){
-    initFolders();
     onOpen(e);
 }
 
@@ -40,9 +39,9 @@ function showSnip() {
  * Display a popup with a link to the Google Drive Folder for the current form
  */
 function showFolderLink() {
-    var html = HtmlService.createTemplateFromFile('FolderLink').evaluate()
+    var html = HtmlService.createTemplateFromFile('ui/FolderLink').evaluate()
         .setWidth(200)
-        .setHeight(25)
+        .setHeight(100)
         .setSandboxMode(HtmlService.SandboxMode.IFRAME);
     FormApp.getUi().showModalDialog(html, 'View Snipped Images');
 }
@@ -58,7 +57,6 @@ function showAboutAuthNone(){
  * Show the instructions for AuthMode.LIMITED
  */
 function showAboutAuthLimited(){
-    initFolders();
     showAbout(ScriptApp.AuthMode.LIMITED);
 }
 
@@ -67,7 +65,7 @@ function showAboutAuthLimited(){
  * @param authMode the AuthMode for the application (ScriptApp.AuthMode.NONE or ScriptApp.AuthMode.LIMITED)
  */
 function showAbout(authMode){
-    var html = HtmlService.createTemplateFromFile('Instructions');
+    var html = HtmlService.createTemplateFromFile('ui/Instructions');
     html.data={
         authMode:authMode
     };
