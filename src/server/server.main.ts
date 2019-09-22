@@ -3,6 +3,7 @@
  */
 function createAppFolder(){
 
+    // @ts-ignore
     var folder = DriveApp.createFolder(settings().folder_name);
     PropertiesService.getUserProperties().setProperty('appFolder',folder.getId());
 }
@@ -168,12 +169,14 @@ function generateImageName(folder, mode: string, question_number: number, respon
             if(response){
                 name+=" Response ";
                 if(!noCount) {
+                    // @ts-ignore
                     name += (countSimilarFiles(name, folder) + 1);
                 }
             }
             else{
                 name+=" part ";
                 if(!noCount){
+                    // @ts-ignore
                     name+=(countSimilarFiles(name,folder)+1);
                 }
 
@@ -182,6 +185,7 @@ function generateImageName(folder, mode: string, question_number: number, respon
         default:
             name = "Instruction ";
             if(!noCount){
+                // @ts-ignore
                 name+=(countSimilarFiles(name,folder)+1);
             }
             break;
@@ -197,6 +201,7 @@ function generateImageName(folder, mode: string, question_number: number, respon
  * @param response Boolean indicating whether image is a response (only required for image mode)
  */
 function saveCrop(imgString: string, mode: string, question_number: number, response: boolean){
+    // @ts-ignore
     const blob = getBlobFromEmbed(imgString);
     saveImage(blob, getFormFolder(), mode, question_number, response);
     return {

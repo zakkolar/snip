@@ -26,6 +26,7 @@ function onInstall(e){
  * Display the Snip popup
  */
 function showSnip() {
+    // @ts-ignore
     initFolders();
 
     var html = HtmlService.createTemplateFromFile('ui/Snip').evaluate()
