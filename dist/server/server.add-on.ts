@@ -6,6 +6,7 @@ function onOpen(e) {
     let aboutFunction;
     menu.addItem('Snip Images', 'showSnip');
     menu.addItem('View Snipped Images','showFolderLink');
+    menu.addItem('Transcribe Images to Text','showTranscribe');
     menu.addSeparator();
     if(e && e.authMode == ScriptApp.AuthMode.LIMITED){
         aboutFunction='showAboutAuthLimited';
@@ -34,6 +35,16 @@ function showSnip() {
         .setHeight(425)
         .setSandboxMode(HtmlService.SandboxMode.IFRAME);
     FormApp.getUi().showModalDialog(html, 'Snip Image');
+}
+
+/**
+ * Display the transcription menu
+ */
+function showTranscribe() {
+    var html = HtmlService.createTemplateFromFile('ui/Transcribe').evaluate()
+        .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+        .setTitle('Transcribe Images');
+    FormApp.getUi().showSidebar(html);
 }
 
 /**
